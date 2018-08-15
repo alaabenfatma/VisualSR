@@ -1,0 +1,1005 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="clr-namespace:VisualSR.Core"
+    xmlns:tools="clr-namespace:VisualSR.Tools">
+    <Style x:Key="ExecPin" TargetType="Path">
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="Data">
+            <Setter.Value>
+                <PathGeometry
+                    Figures="m 42.333333 95.916667 h 21.166666 l 21.166667 31.750003 -21.166667 31.75 H 42.333333 Z" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Path.IsMouseOver" Value="True">
+                <Setter Property="Path.StrokeThickness" Value="3" />
+                <Setter Property="Path.Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="1" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="ObjectPin" TargetType="Path">
+        <Setter Property="Margin" Value="3,10,0,0" />
+        <Setter Property="Height" Value="17" />
+        <Setter Property="Width" Value="17" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="Data">
+            <Setter.Value>
+                <PathGeometry
+                    Figures="m 160.19239 150.26238 c -4.72983 0.39392 -12.31993 2.27463 -17.99664 4.45928 -13.18721 5.07504 -25.78767 13.2339 -38.07182 24.6517 -4.92553 4.57816 -8.073685 6.85558 -12.276488 8.88099 -6.046768 2.91406 -11.395127 4.12868 -18.233031 4.14073 -8.846186 0.0156 -16.300075 -2.20361 -23.7001 -7.05614 -3.532788 -2.3166 -8.957708 -7.67361 -11.270223 -11.12913 -4.975306 -7.43444 -7.323211 -15.02953 -7.356932 -23.79848 -0.02662 -6.92145 1.384614 -13.02973 4.421774 -19.13885 3.85497 -7.75411 10.752744 -14.70514 18.476988 -18.61964 6.085575 -3.08404 12.182823 -4.54222 19.104272 -4.56884 4.328468 -0.0166 6.772707 0.29041 10.985588 1.38002 7.01616 1.81465 12.534152 4.9199 18.398672 10.35387 17.98222 16.66203 37.86828 27.31861 54.9793 29.4624 4.88195 0.61164 5.25479 0.75588 2.53864 0.98209 z"
+                    FillRule="NonZero" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Path.IsMouseOver" Value="True">
+                <Setter Property="Path.StrokeThickness" Value="3" />
+                <Setter Property="Path.Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="1" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type MenuItem}">
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="Col0" MinWidth="17" Width="Auto"
+                                                  SharedSizeGroup="MenuItemIconColumnGroup" />
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuTextColumnGroup" />
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
+                                <ColumnDefinition x:Name="Col3" Width="14" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- ContentPresenter to show an Icon if needed -->
+                            <ContentPresenter Grid.Column="0" Margin="4,0,6,0" x:Name="Icon" VerticalAlignment="Center"
+                                              ContentSource="Icon" />
+
+                            <!-- Glyph is a checkmark if needed for a checkable menu -->
+                            <Grid Grid.Column="0" Visibility="Hidden" Margin="4,0,6,0" x:Name="GlyphPanel"
+                                  VerticalAlignment="Center">
+                                <Path x:Name="GlyphPanelpath" VerticalAlignment="Center"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Data="M0,2 L0,4.8 L2.5,7.4 L7.1,2.8 L7.1,0 L2.5,4.6 z"
+                                      FlowDirection="LeftToRight" />
+                            </Grid>
+
+                            <!-- Content for the menu text etc -->
+                            <ContentPresenter Grid.Column="1"
+                                              Margin="{TemplateBinding Padding}"
+                                              x:Name="HeaderHost"
+                                              RecognizesAccessKey="True"
+                                              ContentSource="Header" />
+
+                            <!-- Content for the menu IGT -->
+                            <ContentPresenter Grid.Column="2"
+                                              Margin="8,1,8,1"
+                                              x:Name="IGTHost"
+                                              ContentSource="InputGestureText"
+                                              VerticalAlignment="Center" />
+
+                            <!-- Arrow drawn path which points to the next level of the menu -->
+                            <Grid Grid.Column="3" Margin="4,0,6,0" x:Name="ArrowPanel" VerticalAlignment="Center">
+                                <Path x:Name="ArrowPanelPath" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                      Fill="{TemplateBinding Foreground}" Data="M0,0 L0,8 L4,4 z" />
+                            </Grid>
+
+                            <!-- The Popup is the body of the menu which expands down or across depending on the level of the item -->
+                            <Popup
+                                IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                Placement="Right" x:Name="SubMenuPopup" Focusable="false"
+                                PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                                <Border x:Name="SubMenuBorder"
+                                        BorderBrush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}"
+                                        BorderThickness="1" Padding="2,2,2,2">
+                                    <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True">
+                                        <!-- StackPanel holds children of the menu. This is set by IsItemsHost=True -->
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                    </Grid>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+
+                    <!-- These triggers re-configure the four arrangements of MenuItem to show different levels of menu via Role -->
+                    <ControlTemplate.Triggers>
+                        <!-- Role = TopLevelHeader : this is the root menu item in a menu; the Popup expands down -->
+                        <Trigger Property="Role" Value="TopLevelHeader">
+                            <Setter Property="Padding" Value="6,1,6,1" />
+                            <Setter Property="Placement" Value="Bottom" TargetName="SubMenuPopup" />
+                            <Setter Property="MinWidth" Value="0" TargetName="Col0" />
+                            <Setter Property="Width" Value="Auto" TargetName="Col3" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="Icon" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="GlyphPanel" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="IGTHost" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel" />
+                        </Trigger>
+
+                        <!-- Role = TopLevelItem :  this is a child menu item from the top level without any child items-->
+                        <Trigger Property="Role" Value="TopLevelItem">
+                            <Setter Property="Padding" Value="6,1,6,1" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel" />
+                        </Trigger>
+
+                        <!-- Role = SubMenuHeader : this is a child menu item which does not have children -->
+                        <Trigger Property="Role" Value="SubmenuHeader">
+                            <Setter Property="DockPanel.Dock" Value="Top" />
+                            <Setter Property="Padding" Value="0,2,0,2" />
+                        </Trigger>
+
+                        <!-- Role = SubMenuItem : this is a child menu item which has children-->
+                        <Trigger Property="Role" Value="SubmenuItem">
+                            <Setter Property="DockPanel.Dock" Value="Top" />
+                            <Setter Property="Padding" Value="0,2,0,2" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel" />
+                        </Trigger>
+                        <Trigger Property="IsSuspendingPopupAnimation" Value="true">
+                            <Setter Property="PopupAnimation" Value="None" TargetName="SubMenuPopup" />
+                        </Trigger>
+
+
+                        <!-- Using the system colors for the Menu Highlight and IsEnabled-->
+                        <Trigger Property="IsHighlighted" Value="true">
+                            <Setter Property="Background" TargetName="Border">
+                                <Setter.Value>
+                                    <LinearGradientBrush
+                                        EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FF4B4A4A" Offset="0" />
+                                        <GradientStop Color="#FF3E3D3D" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="LightGray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type Separator}">
+        <Setter Property="Margin" Value="0,3,0,3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Grid>
+                        <Rectangle Height="1"
+                                   Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="VirtualControlStyle" TargetType="Canvas">
+        <Setter Property="ScrollViewer.Visibility" Value="Visible" />
+        <Setter Property="LayoutTransform">
+
+            <Setter.Value>
+                <MatrixTransform />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+
+            <Setter.Value>
+                <DrawingBrush TileMode="Tile" Viewport="10,10,20,20"
+                              ViewportUnits="Absolute">
+                    <DrawingBrush.Drawing>
+
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="#353535">
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <RectangleGeometry Rect="0,0,50,50" />
+
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#FFE8E8E8" Thickness="0.1" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ListView">
+        <Style.Resources>
+            <LinearGradientBrush x:Key="Item.MouseOver.Background"
+                                 EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FF4B4A4A" Offset="0" />
+                <GradientStop Color="#FF3E3D3D" Offset="1" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="Item.SelectedInactive.Background"
+                                 EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FF4A4A4B" Offset="0" />
+                <GradientStop Color="#FF3E3D3D" Offset="1" />
+            </LinearGradientBrush>
+            <LinearGradientBrush
+                x:Key="Item.SelectedActive.Background"
+                EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FF2A2130" Offset="1" />
+                <GradientStop Color="#FF303030" Offset="0" />
+            </LinearGradientBrush>
+            <Style TargetType="{x:Type ListViewItem}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="Padding" Value="4,1" />
+                <Setter Property="HorizontalContentAlignment"
+                        Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                <Setter Property="VerticalContentAlignment"
+                        Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="#FF444444" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="true">
+                                <ContentPresenter
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="Bd"
+                                            Value="{DynamicResource Item.MouseOver.Background}" />
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive"
+                                                   Value="False" />
+                                        <Condition Property="IsSelected" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="Bd"
+                                            Value="{DynamicResource Item.SelectedInactive.Background}" />
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive"
+                                                   Value="True" />
+                                        <Condition Property="IsSelected" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="Bd"
+                                            Value="{DynamicResource Item.SelectedActive.Background}" />
+                                    <Setter Property="Selector.BorderBrush" TargetName="Bd">
+                                        <Setter.Value>
+                                            Gold
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="TextElement.Foreground"
+                                            TargetName="Bd"
+                                            Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="ToolTipHint" TargetType="Path">
+        <Setter Property="Data">
+            <Setter.Value>
+                <PathGeometry
+                    Figures="m 45.830509 421.95158 c -3.309093 -1.21673 -4.999249 -3.66852 -4.960291 -7.19555 0.02184 -1.97725 2.869442 -24.52001 6.328005 -50.09501 l 6.288295 -46.5 -3.862496 -3.35745 c -6.433263 -5.59206 -8.279171 -10.19449 -8.279171 -20.64255 0 -10.70061 1.852241 -15.08986 8.922159 -21.14283 l 4.505197 -3.85717 1.088462 -10 C 58.5229 234.70236 65.133523 213.70721 74.775084 199.08937 L 76.80107 196.01771 39.06579 184.27894 C 12.335832 175.96373 0.82012895 171.94219 -0.41949155 170.48981 c -2.23173625 -2.61478 -2.23173625 -6.0212 0 -8.73607 C 1.8691558 158.96964 251.85018 80.203857 255.79497 81.023877 c 2.0699 0.43028 176.36984 55.048833 235.24377 73.715883 8.63953 2.73932 16.40203 5.67438 17.25 6.52235 2.11836 2.11835 1.96037 7.71011 -0.27499 9.73308 -0.99922 0.90428 -58.55129 19.47343 -127.89349 41.26479 l -126.07673 39.62064 -73.77299 -23.29958 -73.77298 -23.29958 -4.13703 4.56949 c -9.054928 10.00148 -16.39447 31.07476 -18.180092 52.19864 l -0.618957 7.32226 4.78936 4.39458 c 6.212199 5.70015 8.761056 11.44858 8.810076 19.86934 0.0517 8.87373 -1.736086 13.51656 -7.586528 19.70254 l -4.957191 5.2415 6.530783 48.79061 c 5.898936 44.07016 6.387936 49.0126 5.054356 51.08523 -0.812034 1.26205 -2.607186 2.72455 -3.989227 3.25 -2.615861 0.99455 -43.753406 1.21267 -46.382601 0.24593 z M 239.83051 364.99566 c -57.38476 -2.47194 -106.10979 -18.41231 -122.67735 -40.13384 -5.72733 -7.50902 -5.81338 -8.7073 -3.52221 -49.04987 1.13541 -19.99199 2.28492 -36.56963 2.55449 -36.83919 0.26956 -0.26957 29.90201 8.77502 65.84988 20.09907 57.6802 18.17003 66.14119 20.58919 72.01044 20.58919 5.87017 0 14.30374 -2.41228 71.86259 -20.55512 35.86655 -11.30532 65.52931 -20.19282 65.91723 -19.75 0.74935 0.85538 4.06361 58.13082 4.02675 69.58836 -0.028 8.7079 -2.74399 14.25546 -10.66473 21.78339 -15.44094 14.67521 -46.32282 26.17618 -84.35709 31.41611 -11.77786 1.62261 -41.93782 3.61649 -50 3.30549 -2.475 -0.0955 -7.425 -0.29959 -11 -0.45359 z"
+                    FillRule="NonZero" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Fill">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1" />
+                    <GradientStop Color="#FFB6B4B4" Offset="0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF424242" Offset="1" />
+                    <GradientStop Color="WhiteSmoke" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ContextMenu">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+        <Setter Property="HasDropShadow" Value="True" />
+        <Setter Property="Foreground" Value="WhiteSmoke" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border
+                        Name="Border"
+                        Background="{DynamicResource GlobalBackground}"
+                        BorderThickness="1">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.7,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFB2B2B2" Offset="0" />
+                                <GradientStop Color="#FF252525" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <StackPanel IsItemsHost="True"
+                                    KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasDropShadow" Value="true">
+                            <Setter TargetName="Border" Property="Padding" Value="0,3,0,3" />
+                            <Setter TargetName="Border" Property="CornerRadius" Value="4" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="VoidNode" TargetType="Border">
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <RadialGradientBrush>
+                    <GradientStop Color="Transparent" Offset="0" />
+                    <GradientStop Color="#E5353535" Offset="0" />
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="Focusable" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="LightYellow" />
+                <Setter Property="BorderThickness" Value="2" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="VirtualBorderSelected" TargetType="Border">
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Background" Value="#324245" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="BorderBrush" Value="Black" />
+    </Style>
+    <Style x:Key="VirtualBorderHeader" TargetType="Border">
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="2" />
+        <Setter Property="CornerRadius" Value="8,8,0,0" />
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0,5.1">
+                    <GradientStop Color="Black" Offset="1.0" />
+                    <GradientStop Color="Transparent" Offset="0.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <!--<Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BackGround}"></Setter>-->
+
+    </Style>
+    <Style x:Key="InExecPortStyle" TargetType="core:Port">
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="AliceBlue" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel x:Name="PortContainer" HorizontalAlignment="Left" Orientation="Horizontal"
+                                ClipToBounds="False">
+
+
+                        <Path Style="{DynamicResource ExecPin}" Name="Pin"
+                              Stroke="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}"
+                              Fill="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}"
+                              Stretch="Fill"
+                              Height="15" Width="15" />
+
+                        <Label Margin="0,3,0,0"
+                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                               Foreground="Azure" Height="50" />
+
+                    </StackPanel>
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+    </Style>
+    <Style x:Key="OutExecPortStyle" TargetType="core:Port">
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="AliceBlue" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False">
+
+                        <Label Margin="0,3,0,0"
+                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                               Foreground="Azure" Height="50" />
+
+                        <Path Style="{DynamicResource ExecPin}" Name="Pin"
+                              Stroke="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}"
+                              Fill="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}"
+                              Stretch="Fill"
+                              Height="15" Width="15" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+    </Style>
+    <Style x:Key="TablePath" TargetType="Path">
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="Data">
+            <Setter.Value>
+                M 0 927 V 771 h 110 110 v 156 156 H 110 0 Z m 217 -0.005 V 773.99047 L 110.25 774.245 3.5 774.5 3.2468055 927.25 2.993611 1080 H 109.99681 217 V 926.99548 Z M 4 927.5 V 776 H 110 216 V 927.5 1079 H 110 4 Z M 271.24687 927.25 271.5 771.5 h 110 110 l 0.25313 155.75 0.25314 155.75 H 381.5 270.99373 Z M 488 927 V 774 H 381.5 c -70.33333 0 -106.5 0.33959 -106.5 1 0 0.66038 36 1 106 1 h 106 v 151.49546 151.49544 l -106.25 0.2591 -106.25 0.2592 106.75 0.2454 L 488 1080 Z m 55 0 V 771 h 110 110 v 156 156 H 653 543 Z M 654.25 1079.25 548 1078.9909 V 927.49546 776 h 106.05902 c 70.45136 0 105.85152 -0.33573 105.44098 -1 -0.40576 -0.65653 -37.17705 -1 -107.05902 -1 H 546 v 153 153 l 107.25 -0.2454 107.25 -0.2454 z M 0 541.5 V 386 H 110 220 V 541.5 697 H 110 0 Z m 217 0 V 389 H 110 3 V 541.5 694 H 110 217 Z M 4.2467746 541.75 4.5 390.5 110.25 390.24543 216 389.99087 V 541.49543 693 H 109.99677 3.9935492 Z M 271 541.5 V 386 H 381.5 492 V 541.5 697 H 381.5 271 Z m 217 0 V 389 l -106.75 0.24315 -106.75 0.24315 106 0.50685 106 0.50685 0.25323 151.24546 0.25322 151.24545 -106.25322 0.25914 L 274.5 693.50919 381.25 693.75459 488 694 Z m 55 0 V 386 H 653 763 V 541.5 697 H 653 543 Z M 654.25 693.25005 548 692.99091 V 541.48643 389.98195 l 106.00006 0.25902 c 58.30003 0.14247 106.00003 -0.0785 106 -0.49097 C 760.00003 389.3375 711.85 389 653 389 H 546 V 541.5 694 l 107.25 -0.24541 107.25 -0.2454 z M 0 156 V 0 H 110 220 V 156 312 H 110 0 Z m 217 0 V 3 H 110 3 v 152.33333 c 0 83.78334 0.3 152.63334 0.6666667 153 C 4.0333333 308.7 52.183333 309 110.66667 309 H 217 Z M 4.6666667 307.33333 C 4.3 306.96667 4 238.79167 4 155.83333 V 5 H 110 216 V 156.5 308 H 110.66667 C 52.733333 308 5.0333333 307.7 4.6666667 307.33333 Z M 271.67105 311.33772 C 271.30197 310.96864 271 240.76667 271 155.33333 V 0 H 381.50313 492.00627 L 491.75313 155.75 491.5 311.5 381.92105 311.75438 c -60.26842 0.13991 -109.88092 -0.0476 -110.25 -0.41666 z M 488 156 V 3 H 381.5 C 311.16667 3 275 3.3395931 275 4 c 0 0.6603774 36 1 106 1 h 106 v 151.49546 151.49545 l -106.25 0.25914 -106.25 0.25914 106.75 0.2454 L 488 309 Z m 55 0 V 0 H 653 763 V 156 312 H 653 543 Z m 216.34557 152.25 c 0.25499 -0.4125 -47.19345 -0.63344 -105.44098 -0.49097 L 548 308.01805 V 156.50903 5 H 654 C 724 5 760 4.6603774 760 4 760 3.3395639 723.66667 3 653 3 H 546 v 153 153 h 106.44098 c 58.54254 0 106.64961 -0.3375 106.90459 -0.75 z
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Path.StrokeThickness" Value="3" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="InObjectPortStyle" TargetType="core:ObjectPort">
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="AliceBlue" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ControlTemplate.Resources>
+                        <Style x:Key="HoveredPort" TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop
+                                            Color="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}"
+                                            Offset="0.2" />
+                                        <GradientStop Color="Transparent" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False">
+
+
+                        <StackPanel.Resources>
+                            <Style x:Key="InnerPort" TargetType="Border">
+                                <Setter Property="Margin" Value="0,10,0,0" />
+                                <Setter Property="Height" Value="12" />
+                                <Setter Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}" />
+                                <Setter Property="Width" Value="12" />
+                                <Setter Property="BorderBrush"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}" />
+                                <Setter Property="CornerRadius" Value="360,360,360,360" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderThickness" Value="2" />
+                                    </Trigger>
+
+                                </Style.Triggers>
+                            </Style>
+                            <Style x:Key="ControlsPanelStyle" TargetType="StackPanel" />
+                        </StackPanel.Resources>
+
+                        <Path Style="{DynamicResource ObjectPin}" Name="Pin"
+                              Fill="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}"
+                              Stroke="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}" />
+
+                        <Label Margin="0,7,0,0"
+                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                               Foreground="Azure" Height="30" />
+                        <StackPanel Style="{DynamicResource ControlsPanelStyle}" Margin="5,3,0,0"
+                                    x:Name="ControlsPanel"
+                                    HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False" />
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+    <Style x:Key="OutObjectPortStyle" TargetType="core:Port">
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="AliceBlue" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel x:Name="Container" HorizontalAlignment="Left" Orientation="Horizontal"
+                                ClipToBounds="False">
+                        <StackPanel.Resources>
+                            <Style x:Key="ControlsPanelStyle" TargetType="StackPanel" />
+                        </StackPanel.Resources>
+                        <StackPanel Style="{DynamicResource ControlsPanelStyle}" Margin="5,3,0,0"
+                                    x:Name="ControlsPanel"
+                                    HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False" />
+
+                        <Label Margin="0,5,0,0"
+                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                               Foreground="Azure" Height="30" />
+                        <Path Style="{DynamicResource ObjectPin}" Name="Pin"
+                              Fill="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}"
+                              Stroke="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}" />
+
+
+                    </StackPanel>
+                    <!--<ControlTemplate.Triggers>
+                        <Trigger Property="Path.IsMouseOver" Value="True" SourceName="Pin">
+                            <Setter Property="Path.StrokeThickness" Value="3" TargetName="Pin"/>
+                            <Setter Property="Path.Effect" TargetName="Pin">
+                                <Setter.Value>
+                                    <BlurEffect Radius="1" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>-->
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+    </Style>
+    <Style x:Key="InArrayPortStyle" TargetType="core:ObjectPort">
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="AliceBlue" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ControlTemplate.Resources>
+                        <Style x:Key="HoveredPort" TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop
+                                            Color="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}"
+                                            Offset="0.2" />
+                                        <GradientStop Color="Transparent" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False">
+
+
+                        <Path x:Name="Pin" Margin="0,10,0,0" Style="{DynamicResource TablePath}" StrokeThickness=".5"
+                              Stroke="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}"
+                              Height="20" Width="20"
+                              Fill="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}" />
+                        <Label Margin="0,7,0,0"
+                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                               Foreground="Azure" Height="30" />
+                        <StackPanel Margin="5,3,0,0" x:Name="ControlsPanel"
+                                    HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False" />
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+    <Style x:Key="OutArrayPortStyle" TargetType="core:Port">
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="AliceBlue" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False">
+                        <StackPanel.Resources>
+                            <Style x:Key="InnerPort" TargetType="Border">
+                                <Setter Property="Margin" Value="0,10,0,0" />
+                                <Setter Property="Height" Value="12" />
+                                <Setter Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}" />
+                                <Setter Property="Width" Value="12" />
+                                <Setter Property="BorderBrush"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}" />
+                                <Setter Property="CornerRadius" Value="360,360,360,360" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderThickness" Value="2" />
+                                    </Trigger>
+
+                                </Style.Triggers>
+                            </Style>
+                            <Style x:Key="ControlsPanelStyle" TargetType="StackPanel" />
+                        </StackPanel.Resources>
+                        <StackPanel Style="{DynamicResource ControlsPanelStyle}" Margin="5,3,0,0"
+                                    x:Name="ControlsPanel"
+                                    HorizontalAlignment="Left" Orientation="Horizontal" ClipToBounds="False" />
+
+                        <Label Margin="0,5,0,0"
+                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                               Foreground="Azure" Height="30" />
+
+
+                        <Path x:Name="Pin" Margin="0,10,0,0" Style="{DynamicResource TablePath}" StrokeThickness=".5"
+                              Stroke="{Binding RelativeSource={RelativeSource TemplatedParent},Path=StrokeBrush}"
+                              Height="20" Width="20"
+                              Fill="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}" />
+
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+    </Style>
+    <Style x:Key="NodeStyle" TargetType="core:Node">
+        <Setter Property="RenderTransformOrigin" Value="0,1" />
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="false">
+                        <Canvas x:Name="Container" DockPanel.Dock="Top">
+                            <Border x:Name="BackgroundBorder" Style="{DynamicResource VoidNode}"
+                                    Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" />
+                            <Border x:Name="BorderNode" Background="{TemplateBinding Background}"
+                                    Style="{DynamicResource VirtualBorderHeader}" Canvas.Top="2" Canvas.Left="1.5"
+                                    Height="30" Width="{TemplateBinding Width}" />
+                            <StackPanel x:Name="InExecPorts" Background="Transparent" Canvas.Left="5" Canvas.Top="32"
+                                        Orientation="Vertical" VerticalAlignment="Top" ClipToBounds="True" />
+                            <StackPanel x:Name="OutExecPorts" Background="Transparent" Canvas.Right="5" Canvas.Top="32"
+                                        Orientation="Vertical" VerticalAlignment="Top" ClipToBounds="True" />
+
+                            <StackPanel Canvas.Left="3" x:Name="InputPorts" Background="Transparent"
+                                        Orientation="Vertical" VerticalAlignment="Top" ClipToBounds="True" />
+                            <StackPanel Width="20" />
+                            <StackPanel x:Name="OutputPorts" Background="Transparent" Canvas.Right="5"
+                                        Orientation="Vertical" VerticalAlignment="Top" ClipToBounds="True" />
+
+                            <Label Name="NodeTitle" Background="Transparent" Foreground="Azure" Canvas.Top="4">
+                                <TextBlock Foreground="WhiteSmoke" FontSize="12" HorizontalAlignment="Center"
+                                           Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}"
+                                           FontFamily="Microsoft YaHei" />
+                            </Label>
+
+                            <Path Name="NodeHint" Canvas.Right="5" Canvas.Top="2" Style="{DynamicResource ToolTipHint}"
+                                  HorizontalAlignment="Right" Stretch="Fill" Width="24" Height="24"
+                                  Visibility="Collapsed">
+                                <Path.ToolTip>
+                                    <Border Background="#424242" BorderBrush="Gray" CornerRadius="3,3,3,3"
+                                            BorderThickness="2">
+                                        <StackPanel MaxWidth="300" Margin="3">
+                                            <TextBlock Foreground="WhiteSmoke" FontSize="12"
+                                                       HorizontalAlignment="Center"
+                                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}"
+                                                       FontFamily="Segoe UI Semibold" />
+                                            <TextBlock Foreground="Wheat"
+                                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Description}"
+                                                       TextWrapping="Wrap" />
+                                            <StackPanel Orientation="Vertical" x:Name="HintControls" />
+                                        </StackPanel>
+                                    </Border>
+                                </Path.ToolTip>
+                            </Path>
+                            <StackPanel Canvas.Right="5" Canvas.Bottom="2" x:Name="BottomControls" />
+                        </Canvas>
+                        <StackPanel DockPanel.Dock="Bottom" x:Name="InputPortsControl" Orientation="Vertical"
+                                    ClipToBounds="True" />
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.Setters>
+                                <Setter TargetName="NodeHint" Property="Visibility" Value="Visible" />
+                            </Trigger.Setters>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1"
+                                                     Duration="0:0:.5" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="VirtualWire" TargetType="core:Wire">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.Resources>
+                            <Style x:Key="WireStyle" TargetType="Path">
+                                <Setter Property="Stroke"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" />
+                                <Setter Property="StrokeThickness" Value="1.5" />
+                                <Setter Property="Data">
+                                    <Setter.Value>
+                                        <PathGeometry x:Name="CurveCore">
+                                            <PathGeometry.Figures>
+                                                <PathFigureCollection>
+                                                    <PathFigure
+                                                        StartPoint="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=StartPoint}">
+                                                        <PathFigure.Segments>
+                                                            <PathSegmentCollection>
+                                                                <BezierSegment
+                                                                    Point1="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MiddlePoint1}"
+                                                                    Point2="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MiddlePoint2}"
+                                                                    Point3="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=EndPoint}" />
+                                                            </PathSegmentCollection>
+                                                        </PathFigure.Segments>
+                                                    </PathFigure>
+                                                </PathFigureCollection>
+                                            </PathGeometry.Figures>
+                                        </PathGeometry>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Path Style="{DynamicResource WireStyle}" x:Name="Wire" />
+                        <Path Visibility="Collapsed"
+                              Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
+                              Stroke="#FF260046" x:Name="BeatContainer">
+                            <Path.Effect>
+                                <BlurEffect Radius="3" KernelType="Box" />
+                            </Path.Effect>
+                            <Path.Data>
+                                <EllipseGeometry x:Name="Beat" Center="10,100" RadiusX="8" RadiusY="8" />
+                            </Path.Data>
+                            <Path.Triggers>
+                                <EventTrigger RoutedEvent="Path.MouseEnter" />
+                            </Path.Triggers>
+                        </Path>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Wire" Property="Path.StrokeThickness" Value="3" />
+                            <Setter TargetName="Wire" Property="Path.Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="2.5" RenderingBias="Performance" KernelType="Gaussian"
+                                                x:Name="bEffect" />
+                                </Setter.Value>
+                            </Setter>
+
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style x:Key="Comment" TargetType="core:Comment">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Canvas Background="Transparent">
+
+                        <Border
+                            Background="#33FFFFFF"
+                            Height="25"
+                            Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Width}" />
+
+                        <Border Background="#99B2B2B2"
+                                Margin="0,0,0,4"
+                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Width}"
+                                Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Height}"
+                                BorderBrush="#FF769954"
+                                BorderThickness="2" />
+                        <TextBox
+                            FontSize="16"
+                            Foreground="Black"
+                            BorderBrush="Transparent"
+                            Background="Transparent"
+                            Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Width}"
+                            Text="{Binding RelativeSource={RelativeSource TemplatedParent},Path= Summary, Mode=TwoWay}" />
+                        <StackPanel Name="CornerImage_Resize" Height="12" Width="12">
+                            <StackPanel.Background>
+                                <ImageBrush ImageSource="../MediaResources/handle_resize.png" />
+                            </StackPanel.Background>
+                        </StackPanel>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="IndicationBorder" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2FC959" Offset="0.498" />
+                    <GradientStop Color="#B2C6ECD7" Offset="0" />
+                    <GradientStop Color="#B22DC192" Offset="0.967" />
+                    <GradientStop Color="#FE30C95A" Offset="0.774" />
+                    <GradientStop Color="#FE30C95A" Offset="0.272" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+
+            <EventTrigger RoutedEvent="MouseMove">
+                <BeginStoryboard Name="RootProof">
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Background.(GradientBrush.GradientStops)[1].(GradientStop.Offset)"
+                            From="0" To="1" Duration="0:0:1"
+                            AutoReverse="True" RepeatBehavior="Forever" />
+                    </Storyboard>
+                </BeginStoryboard>
+
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <StopStoryboard BeginStoryboardName="RootProof" />
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="GetSetMenu" TargetType="core:GetSetMenu">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Canvas>
+                        <Border
+                            Width="85"
+                            Height="44"
+                            CornerRadius="6,6,6,6"
+                            Background="#323232"
+                            BorderBrush="AntiqueWhite"
+                            BorderThickness="1.5" />
+                        <Canvas Canvas.Left="2.7" Canvas.Top="3">
+                            <Canvas.Resources>
+                                <Style x:Key="GetSetButton" TargetType="{x:Type Button}">
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                    <Setter Property="Background" Value="#323232" />
+                                    <Setter Property="Foreground" Value="AliceBlue" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Name="Chrome"
+                                                        Background="{TemplateBinding Background}"
+                                                        SnapsToDevicePixels="true">
+                                                    <ContentPresenter Name="Presenter"
+                                                                      Margin="{TemplateBinding Padding}"
+                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                      RecognizesAccessKey="True"
+                                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="false">
+                                                        <Setter Property="Foreground" Value="#333333" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background">
+                                                            <Setter.Value>
+                                                                <LinearGradientBrush EndPoint="1.5,1"
+                                                                                     MappingMode="RelativeToBoundingBox"
+                                                                                     StartPoint="0.0,0">
+                                                                    <GradientStop Color="#CC353535" Offset="0.678" />
+                                                                    <GradientStop Color="#B2117787" Offset="0.285" />
+                                                                </LinearGradientBrush>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="BorderBrush" Value="#cccccc" />
+                                                    </Trigger>
+
+
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Canvas.Resources>
+                            <Button Name="GetButton" Content="Get" Width="80" Style="{DynamicResource GetSetButton}" />
+                            <Button Name="SetButton" Content="Set" Canvas.Top="20" Width="80"
+                                    Style="{DynamicResource GetSetButton}" />
+
+                        </Canvas>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MouseClickEffect" TargetType="tools:MouseClickEffect">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Name="e" Width="30" Height="30">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Transparent" Offset="1" />
+                                <GradientStop
+                                    Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=EffectColor }"
+                                    Offset="0.0" />
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                        <Ellipse.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard Name="RootProof">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Fill.(GradientBrush.GradientStops)[0].(GradientStop.Offset)"
+                                            From="1" To=".2" Duration="0:0:0:.5"
+                                            AutoReverse="True" RepeatBehavior="1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+                        </Ellipse.Triggers>
+
+
+                    </Ellipse>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="FunctionSymbol" TargetType="Path">
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="Data">
+            <Setter.Value>
+                <PathGeometry
+                    Figures="m 317.50475 246.67435 c -0.29892 -0.0703 -0.49506 -0.14315 -0.70612 -0.26223 -0.68692 -0.38756 -1.24327 -1.13094 -1.58068 -2.11207 -0.15602 -0.45369 -0.10555 -0.761 0.16914 -1.02988 0.22521 -0.22045 0.5324 -0.26162 0.81314 -0.10897 0.16896 0.0919 0.25877 0.20991 0.35842 0.47108 0.15978 0.41877 0.20124 0.51016 0.32548 0.71735 0.24624 0.41065 0.52956 0.6523 0.85008 0.72506 0.20305 0.0461 0.37251 0.0293 0.51479 -0.0509 0.21382 -0.12055 0.42865 -0.40411 0.57867 -0.7638 0.0415 -0.0995 0.14955 -0.51327 0.24012 -0.91951 0.23464 -1.0524 0.3911 -1.75269 0.56915 -2.54749 0.0854 -0.38137 0.21141 -0.94438 0.27994 -1.25113 0.28168 -1.26093 0.34763 -1.55604 0.50868 -2.27616 0.0927 -0.41454 0.20432 -0.90971 0.24805 -1.1004 l 0.0795 -0.3467 -1.20881 -0.0151 -1.20881 -0.0151 -0.14742 -0.0889 c -0.24619 -0.14848 -0.39256 -0.4105 -0.39256 -0.70277 0 -0.21328 0.0558 -0.36468 0.19606 -0.53173 0.22215 -0.26464 0.18877 -0.25968 1.74586 -0.25951 1.04484 1.2e-4 1.35246 -0.008 1.37293 -0.0375 0.0145 -0.0207 0.0799 -0.26832 0.14529 -0.5502 0.0654 -0.28188 0.1473 -0.62783 0.182 -0.76877 0.0347 -0.14094 0.10265 -0.41905 0.151 -0.61803 0.38248 -1.57399 0.8282 -2.70415 1.32572 -3.36148 0.49375 -0.65234 1.01859 -0.96676 1.69317 -1.01434 0.39919 -0.0282 0.85195 0.0934 1.20903 0.32464 0.18805 0.12177 0.48779 0.41793 0.58799 0.58096 0.0397 0.0645 0.10692 0.17309 0.14944 0.24118 0.29985 0.48026 0.57244 1.54513 0.4906 1.91653 -0.13534 0.61424 -0.82703 0.83521 -1.23663 0.39505 -0.11704 -0.12577 -0.19377 -0.31237 -0.21813 -0.53044 -0.0312 -0.27939 -0.14525 -0.67343 -0.24814 -0.85732 -0.18037 -0.32235 -0.37017 -0.45761 -0.6421 -0.45761 -0.65371 0 -1.19887 1.11095 -1.80699 3.68234 -0.0922 0.38966 -0.18585 0.7751 -0.20823 0.85653 -0.0224 0.0814 -0.0342 0.15944 -0.0263 0.17335 0.008 0.0139 0.4495 0.0253 0.98135 0.0253 1.06857 0 1.11173 0.006 1.29585 0.19288 0.37829 0.38309 0.31205 1.02466 -0.13389 1.2969 l -0.1523 0.093 -1.18951 0.0151 -1.1895 0.0151 -0.13182 0.58788 c -0.25643 1.14362 -0.44442 1.98338 -0.60739 2.71331 -0.0907 0.40624 -0.20143 0.90142 -0.24606 1.10039 -0.24869 1.10857 -0.40182 1.79211 -0.54031 2.41183 -0.47035 2.10462 -0.48096 2.14413 -0.68405 2.54749 -0.14213 0.28229 -0.18734 0.3526 -0.40255 0.62601 -0.25638 0.3257 -0.43685 0.48111 -0.77229 0.66501 -0.37588 0.20606 -0.98746 0.29633 -1.38085 0.2038 z m 7.17539 -2.06923 c -0.39298 -0.0717 -0.66747 -0.48664 -0.61171 -0.92463 0.0351 -0.27546 0.049 -0.29608 1.18624 -1.75693 0.32916 -0.42282 0.5984 -0.77555 0.59832 -0.78384 -2.1e-4 -0.0193 -0.36241 -0.48545 -0.62074 -0.79892 -0.2688 -0.32616 -0.81836 -1.03051 -0.90562 -1.16069 -0.28106 -0.41933 -0.2056 -1.01874 0.16262 -1.29166 0.13434 -0.0996 0.24028 -0.1283 0.47525 -0.12888 0.17326 -4.6e-4 0.23129 0.0138 0.37823 0.0925 0.22942 0.12297 0.35477 0.27611 0.99551 1.21625 0.28937 0.42459 0.54018 0.77267 0.55735 0.77351 0.0172 7.9e-4 0.13742 -0.15111 0.26722 -0.33765 1.01685 -1.46138 1.06817 -1.52587 1.32877 -1.66973 0.12001 -0.0663 0.18041 -0.0797 0.35013 -0.0778 0.45891 0.005 0.77724 0.34213 0.77778 0.82352 2.1e-4 0.23221 -0.11193 0.48671 -0.33754 0.76574 -0.11711 0.14483 -0.48122 0.60848 -1.00064 1.27418 l -0.38259 0.49035 0.22964 0.2935 c 0.12631 0.16142 0.36134 0.45629 0.5223 0.65527 0.97603 1.2066 1.0602 1.34217 1.0602 1.70761 0 0.56136 -0.42703 0.9356 -0.95935 0.84077 -0.28249 -0.0503 -0.5034 -0.24368 -0.84489 -0.73951 -0.25101 -0.36445 -0.58091 -0.83734 -0.75324 -1.0797 -0.0847 -0.11916 -0.17651 -0.25397 -0.20395 -0.29957 -0.0672 -0.11166 -0.10146 -0.10475 -0.19743 0.0398 -0.0448 0.0675 -0.13203 0.19298 -0.19384 0.27887 -0.0618 0.0859 -0.27236 0.38677 -0.46789 0.66866 -0.6115 0.88153 -0.74278 1.02423 -1.02835 1.1178 -0.1429 0.0468 -0.18029 0.0479 -0.38178 0.0111 z"
+                    FillRule="NonZero" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

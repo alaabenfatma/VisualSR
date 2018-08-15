@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA62D03A-7724-4035-AD2C-28BF357CADBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VisualSR</RootNamespace>
+    <AssemblyName>VisualSR</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>PdbOnly</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>False</Prefer32Bit>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BasicNodes\FileMirrorNode.cs" />
+    <Compile Include="BasicNodes\Get.cs" />
+    <Compile Include="BasicNodes\ReadFile.cs" />
+    <Compile Include="BasicNodes\ReturnNode.cs" />
+    <Compile Include="BasicNodes\Set.cs" />
+    <Compile Include="BasicNodes\SpaghettiDivider.cs" />
+    <Compile Include="BasicNodes\StartNode.cs" />
+    <Compile Include="Compiler\Builder.cs" />
+    <Compile Include="Compiler\GenerateCode.cs" />
+    <Compile Include="Controls\ContentsBrowser.cs" />
+    <Compile Include="Controls\FunctionsList.cs" />
+    <Compile Include="Controls\InnerMessageBox.cs" />
+    <Compile Include="Controls\NodesTree.cs" />
+    <Compile Include="Controls\Notification.cs" />
+    <Compile Include="Controls\PerformanceGauge.cs" />
+    <Compile Include="Controls\PortControlsCollection.cs" />
+    <Compile Include="Controls\Search.cs" />
+    <Compile Include="Controls\VariablesList.cs" />
+    <Compile Include="Core\Brain.cs" />
+    <Compile Include="Core\Comment.cs" />
+    <Compile Include="Core\Connectors.cs" />
+    <Compile Include="Core\CanvasCamera.cs" />
+    <Compile Include="Core\NodesContainer.cs" />
+    <Compile Include="Core\Ports.cs" />
+    <Compile Include="Core\RVariable.cs" />
+    <Compile Include="Core\VirtualControl.cs" />
+    <Compile Include="Core\Node.cs" />
+    <Compile Include="Core\Wire.cs" />
+    <Compile Include="Properties\JB_Annotations.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\MagicLaboratory.cs" />
+    <Compile Include="Tools\NodesManager.cs" />
+    <Compile Include="Tools\Cipher.cs" />
+    <Compile Include="Tools\Hub.cs" />
+    <Compile Include="Tools\PluginsManager.cs" />
+    <Compile Include="Tools\UnitsCalculator.cs" />
+    <None Include="packages.config" />
+    <Compile Include="Tools\ListUtilities.cs" />
+    <Compile Include="Tools\PointsCalculator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Page</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Page</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\Package.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\handle_resize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\VariablesListIcons\Object.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\VariablesListIcons\Details.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\VariablesListIcons\Types\Character.png" />
+    <Resource Include="MediaResources\VariablesListIcons\Types\DataFrame.png" />
+    <Resource Include="MediaResources\VariablesListIcons\Types\Generic.png" />
+    <Resource Include="MediaResources\VariablesListIcons\Types\List_Matrix_etc.png" />
+    <Resource Include="MediaResources\VariablesListIcons\Types\Logical.png" />
+    <Resource Include="MediaResources\VariablesListIcons\Types\Numeric.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\VariablesListIcons\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\VariablesListIcons\PlusHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\Warning.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="MediaResources\ContentsBrowser\Icons\file-icon-md.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\Cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MediaResources\Operations\Run.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

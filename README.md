@@ -1,5 +1,6 @@
 # Visual Scripting Environment -R
-#### Please note that this is not a documentation, Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
+#### Please note that this is not a documentation, it is nothing but an *eye-catcher*. Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
+
 ![alt text](https://github.com/alaabenfatma/VisualSR/blob/master/Resources/splash.gif "SPLASH")
 
 ### NODES

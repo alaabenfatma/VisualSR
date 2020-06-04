@@ -1,0 +1,14 @@
+﻿<Window x:Class="demo.Basic"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo"
+        xmlns:core="clr-namespace:VisualSR.Core;assembly=VisualSR"
+        WindowState="Maximized"
+        mc:Ignorable="d"
+        Title="Basic" Height="300" Width="300">
+    <Grid>
+        <core:VirtualControl />
+    </Grid>
+</Window>

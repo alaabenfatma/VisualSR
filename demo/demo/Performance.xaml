@@ -1,0 +1,23 @@
+﻿<Window x:Class="demo.Performance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo"
+        xmlns:controls="clr-namespace:VisualSR.Controls;assembly=VisualSR"
+        xmlns:core="clr-namespace:VisualSR.Core;assembly=VisualSR"
+
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="Performance" Height="300" Width="300">
+    <Grid Background="#353535">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="1">
+            <controls:PerformanceGauge DockPanel.Dock="Right" />
+        </DockPanel>
+        <core:VirtualControl Grid.Row="0" />
+    </Grid>
+</Window>

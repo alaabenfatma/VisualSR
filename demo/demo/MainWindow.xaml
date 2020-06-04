@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="443.934" Width="525">
+    <StackPanel Orientation="Vertical">
+        <Button Click="Button_Click">Basic Demo</Button>
+        <TextBlock Text="Basic Demo: this demo contains only the visual scripting environment." />
+        <TextBlock Text="You can not compile the nodes nor perform any complex operations." />
+
+        <Button Click="Button_Click_1">Demo with variables list</Button>
+        <TextBlock Text="With Variables List: this demo will make use of the variables list." />
+        <TextBlock Text="Using the variables list, you'll be able to work with variables visually." />
+        <TextBlock Foreground="Green" Text="Drag and Drop operations are permitted." />
+
+        <Button Click="Button_Click_2">Demo with save/load</Button>
+        <TextBlock Text="This demo will present the process of de/serializing all the UIElements" />
+
+        <Button Click="Button_Click_4">Demo with Performance Gauge</Button>
+        <TextBlock Text="This gauge is a component that has been made for fun." />
+        <TextBlock Foreground="Blue" Text="It can prove useful in some particular cases." />
+
+
+        <Button Click="Button_Click_3">Standard Demo</Button>
+        <TextBlock Text="This demo will present how the compilation and generation of the code is done." />
+        <TextBlock Foreground="Red" Text="You'll have to select a folder as a WorkSpace first." />
+
+        <Button Click="Button_Click_5">Advanced Demo</Button>
+        <TextBlock Text="This is (almost) fully-featured. It may contain some bugs." />
+        <TextBlock Foreground="Red" Text="You'll have to select a folder as a WorkSpace first." />
+        <TextBlock Text="HotKeys:" Foreground="BlueViolet" />
+
+        <WrapPanel Orientation="Vertical" Height="85">
+            <TextBlock Text="CTRL + C : Copy " Foreground="Black" />
+            <TextBlock Text="CTRL + X : Cut" Foreground="Black" />
+            <TextBlock Text="CTRL + V : PASTE " Foreground="Black" />
+            <TextBlock Text="CTRL + F : Search " Foreground="Black" />
+            <TextBlock Text="CTRL + A : SELECT ALL" Foreground="Black" />
+            <TextBlock Text="ESC : Unselect ALL" Foreground="Black" />
+            <TextBlock Text="DEL: Delete Selected" Foreground="Black" />
+            <TextBlock Text="Arrows: move nodes" Foreground="Black" />
+        </WrapPanel>
+    </StackPanel>
 </Window>

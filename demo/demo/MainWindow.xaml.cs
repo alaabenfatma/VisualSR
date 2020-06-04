@@ -34,7 +34,7 @@ namespace demo
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var vars = new VarsList();
+            var vars = new VariablesList();
             vars.ShowDialog();
         }
 

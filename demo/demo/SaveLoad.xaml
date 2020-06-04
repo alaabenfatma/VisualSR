@@ -1,0 +1,24 @@
+﻿<Window x:Class="demo.SaveLoad"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:VisualSR.Core;assembly=VisualSR"
+
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="SaveLoad" Height="300" Width="300">
+
+    <Grid Background="#353535">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            <Button x:Name="save" Background="#424242" Foreground="WhiteSmoke">Save</Button>
+            <Button x:Name="load" Background="#424242" Foreground="WhiteSmoke">Load</Button>
+        </StackPanel>
+        <core:VirtualControl x:Name="vControl" Grid.Column="1" />
+    </Grid>
+</Window>

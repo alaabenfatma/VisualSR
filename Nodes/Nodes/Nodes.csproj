@@ -54,6 +54,7 @@
     <Compile Include="Nodes\Logic\IfElse.cs" />
     <Compile Include="Nodes\Logic\Lesser.cs" />
     <Compile Include="Nodes\Logic\LesserEqual.cs" />
+    <Compile Include="Nodes\Logic\LogicalNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

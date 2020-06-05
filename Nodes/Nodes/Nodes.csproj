@@ -64,6 +64,12 @@
     <Compile Include="Nodes\Math\Floor.cs" />
     <Compile Include="Nodes\Math\log.cs" />
     <Compile Include="Nodes\Math\Log10.cs" />
+    <Compile Include="Nodes\Math\Multiply.cs" />
+    <Compile Include="Nodes\Math\Sin.cs" />
+    <Compile Include="Nodes\Math\Subtract.cs" />
+    <Compile Include="Nodes\Math\Sum.cs" />
+    <Compile Include="Nodes\Math\Tan.cs" />
+    <Compile Include="Nodes\Math\Trunc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

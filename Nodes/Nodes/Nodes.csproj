@@ -56,6 +56,10 @@
     <Compile Include="Nodes\Logic\LesserEqual.cs" />
     <Compile Include="Nodes\Logic\LogicalNode.cs" />
     <Compile Include="Nodes\Logic\NotEqual.cs" />
+    <Compile Include="Nodes\Math\Abs.cs" />
+    <Compile Include="Nodes\Math\Ceiling.cs" />
+    <Compile Include="Nodes\Math\Cos.cs" />
+    <Compile Include="Nodes\Math\Divide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

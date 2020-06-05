@@ -60,6 +60,8 @@
     <Compile Include="Nodes\Logic\LesserEqual.cs" />
     <Compile Include="Nodes\Logic\LogicalNode.cs" />
     <Compile Include="Nodes\Logic\NotEqual.cs" />
+    <Compile Include="Nodes\Loops\For.cs" />
+    <Compile Include="Nodes\Loops\While.cs" />
     <Compile Include="Nodes\Math\Abs.cs" />
     <Compile Include="Nodes\Math\Ceiling.cs" />
     <Compile Include="Nodes\Math\Cos.cs" />

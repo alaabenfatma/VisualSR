@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo"
         xmlns:core="clr-namespace:VisualSR.Core;assembly=VisualSR"
+        
         WindowState="Maximized"
         mc:Ignorable="d"
         Title="Basic" Height="300" Width="300">

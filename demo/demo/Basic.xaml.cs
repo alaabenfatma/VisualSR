@@ -21,6 +21,11 @@ namespace demo
     {
         public Basic()
         {
+            Loaded += MyWindow_Loaded;
+          
+        }
+        private void MyWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             InitializeComponent();
         }
     }

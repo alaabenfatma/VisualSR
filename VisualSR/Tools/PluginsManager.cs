@@ -16,7 +16,15 @@ namespace VisualSR.Tools
         public PluginsManager(VirtualControl host)
         {
             _host = host;
-            _plugins = new List<string>(Directory.GetFiles(@"./Plugins/", "*.dll"));
+            try
+            {
+                _plugins = new List<string>(Directory.GetFiles(@"./Plugins/", "*.dll"));
+            }
+            catch (Exception){
+                Console.WriteLine("Could not find the plugins folder. The application will create one.");
+                Directory.CreateDirectory(@"./Plugins/");
+                _plugins = new List<string>(Directory.GetFiles(@"./Plugins/", "*.dll"));
+            }
         }
 
         [ImportMany(typeof(Node))]

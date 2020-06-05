@@ -74,6 +74,12 @@
     <Compile Include="Nodes\Math\Sum.cs" />
     <Compile Include="Nodes\Math\Tan.cs" />
     <Compile Include="Nodes\Math\Trunc.cs" />
+    <Compile Include="Nodes\R\Basics\Cat.cs" />
+    <Compile Include="Nodes\R\Basics\CharacterRArray.cs" />
+    <Compile Include="Nodes\R\Basics\GenericRArray.cs" />
+    <Compile Include="Nodes\R\Basics\NumericRArray.cs" />
+    <Compile Include="Nodes\R\Basics\Print.cs" />
+    <Compile Include="Nodes\R\Basics\Vector1D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

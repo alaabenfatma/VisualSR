@@ -48,6 +48,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Nodes\Characters\Grep.cs" />
+    <Compile Include="Nodes\Characters\Substr.cs" />
+    <Compile Include="Nodes\Characters\Tolower.cs" />
+    <Compile Include="Nodes\Characters\Toupper.cs" />
     <Compile Include="Nodes\Logic\Equal.cs" />
     <Compile Include="Nodes\Logic\Greater.cs" />
     <Compile Include="Nodes\Logic\GreaterEqual.cs" />

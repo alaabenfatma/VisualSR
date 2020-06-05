@@ -83,6 +83,7 @@
     <Compile Include="Nodes\R\Basics\Print.cs" />
     <Compile Include="Nodes\R\Basics\Vector1D.cs" />
     <Compile Include="Nodes\R\CSV\ReadCSV.cs" />
+    <Compile Include="Nodes\R\Plotting\Plot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

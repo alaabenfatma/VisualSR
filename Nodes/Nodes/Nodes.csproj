@@ -80,10 +80,12 @@
     <Compile Include="Nodes\R\Basics\NumericRArray.cs" />
     <Compile Include="Nodes\R\Basics\Print.cs" />
     <Compile Include="Nodes\R\Basics\Vector1D.cs" />
+    <Compile Include="Nodes\R\CSV\ReadCSV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Array.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

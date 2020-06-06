@@ -1,7 +1,23 @@
-# Visual Scripting Environment -R
+# Visual Scripting Environment for R and Data Science
+![alt text](https://github.com/alaabenfatma/VisualSR/blob/master/Resources/splash.gif "SPLASH")
+
+### 📉 Status
+![AppVeyor](https://img.shields.io/appveyor/build/alaabenfatma/visualsr?style=plastic)
+![GitHub issues](https://img.shields.io/github/issues/alaabenfatma/visualsr)
+![GitHub](https://img.shields.io/github/license/alaabenfatma/visualsr)
+
+### 📚 Usage
+This repo contains 3 different projects. Each one of them contains a .csproj file that can load the whole project.
+<ul>
+  <li>VisualSR : This is the core of the project. It contains all the tools, custom controls and utilities. A class library (.dll) will be generated once the project is built.</li>
+  <li>Nodes : This is a project within which I have created many samples of how to create custom nodes. A class library (.dll) will be generated once the project is built.</li>
+  <li>DEMO : This GUI will provide the user with a UX which can help demonstrate the capabilities of this project.</li>
+</ul> 
+
 #### Please note that this is not a documentation, it is nothing but an *eye-catcher*. Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
 
-![alt text](https://github.com/alaabenfatma/VisualSR/blob/master/Resources/splash.gif "SPLASH")
+
+
 
 ### NODES
 

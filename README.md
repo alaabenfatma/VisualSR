@@ -38,9 +38,9 @@ This repo contains 3 different projects. Each one of them contains a .csproj fil
 </ul> 
 
 ### 💕 Contributions
-The project is far from being perfect. Please do no hesitate to open issues, debug the code if needed or make pull requests!
+The project is far from being perfect. Please do not hesitate to open issues, debug the code if needed or make pull requests!
 
-#### Please note that the rest not a documentation, it is nothing but an *eye-catcher*. Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
+#### Please note that the rest is not a documentation, it is nothing but an *eye-catcher*. Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
 
 
 

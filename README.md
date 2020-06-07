@@ -19,7 +19,6 @@ Each project in this repo (VisualSR, Nodes and demo) can be built using one of t
   MSBuild.exe demo\demo.sln
 </pre>
   
-   
 </ul> 
 
 ### 📚 Usage
@@ -30,7 +29,7 @@ This repo contains 3 different projects. Each one of them contains a .csproj fil
   <li>DEMO : This GUI will provide the user with a UX which can help demonstrate the capabilities of this project.</li>
 </ul> 
 
-#### Please note that this is not a documentation, it is nothing but an *eye-catcher*. Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
+#### Please note that the rest not a documentation, it is nothing but an *eye-catcher*. Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
 
 
 

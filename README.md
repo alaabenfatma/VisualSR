@@ -6,6 +6,22 @@
 ![GitHub issues](https://img.shields.io/github/issues/alaabenfatma/visualsr)
 ![GitHub](https://img.shields.io/github/license/alaabenfatma/visualsr)
 
+### 🏗️ Build 
+
+Each project in this repo (VisualSR, Nodes and demo) can be built using one of these two different approaches.
+<ul>
+  <li>Automatically : Using an IDE, such as Visual Studio or SharpDevelop.</li>
+  <li>Semi-manually : You can use <b>MSBuild</b></li>
+    
+<pre class="brush: python">
+  MSBuild.exe VisualSR\VisualSR.sln
+  MSBuild.exe Nodes\Nodes.sln
+  MSBuild.exe demo\demo.sln
+</pre>
+  
+   
+</ul> 
+
 ### 📚 Usage
 This repo contains 3 different projects. Each one of them contains a .csproj file that can load the whole project.
 <ul>

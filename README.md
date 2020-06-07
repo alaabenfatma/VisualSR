@@ -1,10 +1,18 @@
 # Visual Scripting Environment for R and Data Science
 ![alt text](https://github.com/alaabenfatma/VisualSR/blob/master/Resources/splash.gif "SPLASH")
 
+### Technical article -> https://www.codeproject.com/Articles/1239656/VisualSR
+
 ### 📉 Status
 ![AppVeyor](https://img.shields.io/appveyor/build/alaabenfatma/visualsr?style=plastic)
 ![GitHub issues](https://img.shields.io/github/issues/alaabenfatma/visualsr)
 ![GitHub](https://img.shields.io/github/license/alaabenfatma/visualsr)
+
+### 🔧 Pre-requirments
+<ul>
+  <li>.NET Framework 4.5</li>
+  <li><b>rscript</b> has to be reachable from the command-line : https://www.r-project.org/</il>
+</ul>
 
 ### 🏗️ Build 
 
@@ -28,6 +36,9 @@ This repo contains 3 different projects. Each one of them contains a .csproj fil
   <li>Nodes : This is a project within which I have created many samples of how to create custom nodes. A class library (.dll) will be generated once the project is built.</li>
   <li>DEMO : This GUI will provide the user with a UX which can help demonstrate the capabilities of this project.</li>
 </ul> 
+
+### 💕 Contributions
+The project is far from being perfect. Please do no hesitate to open issues, debug the code if needed or make pull requests!
 
 #### Please note that the rest not a documentation, it is nothing but an *eye-catcher*. Refer to this article [CODEPROJECT](https://www.codeproject.com/Articles/1239656/VisualSR) for more details.
 
